@@ -1,4 +1,5 @@
-// === FIREBASE CONFIG (your provided keys) ===
+// firebase.js
+// Initialize Firebase (compat)
 const firebaseConfig = {
   apiKey: "AIzaSyDT9zKU_VPhdI7ePluufEIBQgcZlx78j1s",
   authDomain: "relationship-timeline-d0ffa.firebaseapp.com",
@@ -9,10 +10,16 @@ const firebaseConfig = {
   measurementId: "G-9FXQQ5H244"
 };
 
-// Initialize Firebase
-firebase.initializeApp(firebaseConfig);
-const auth = firebase.auth();
-const db = firebase.firestore();
-
-// Export (for safety)
-window._firebase = { auth, db, firebase };
+try {
+  firebase.initializeApp(firebaseConfig);
+  const auth = firebase.auth();
+  const db = firebase.firestore();
+  // expose
+  window._firebase = { firebase, auth, db };
+  // also expose top-level names for backward compatibility
+  window.auth = auth;
+  window.db = db;
+} catch (e) {
+  console.error('Firebase initialization error', e);
+  // keep page functional (local only)
+}
