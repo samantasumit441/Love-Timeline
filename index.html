@@ -2,309 +2,77 @@
 <html lang="en">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
   <title>Romantic Timeline — Cute Card</title>
+
+  <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
-  <style>
-  :root{
-    --bg1:#FFF1F6;
-    --bg2:#FFF7ED;
-    --accent:#FF5C8A;
-    --muted:#6b6b6b;
-    --card:#ffffff;
-    --glass: rgba(255,255,255,0.6);
-  }
 
-  *{
-    box-sizing:border-box;
-    -webkit-tap-highlight-color: transparent;
-  }
+  <!-- Styles -->
+  <link rel="stylesheet" href="style.css">
 
-  body{
-    margin:0;
-    padding:16px;
-    min-height:100vh;
-    overflow-x:hidden;
-    background: 
-      radial-gradient(900px 500px at 10% 10%, #FFE6F1 0%, transparent 60%),
-      radial-gradient(700px 350px at 90% 90%, #FFF4DE 0%, transparent 55%),
-      linear-gradient(135deg,var(--bg1),var(--bg2));
-    font-family:'Poppins',system-ui,Arial;
-    display:flex;
-    justify-content:center;
-  }
-
-  .wrap{
-    width:100%;
-    max-width:1000px;
-    display:grid;
-    grid-template-columns:1fr 340px;
-    gap:18px;
-    align-items:start;
-  }
-
-  .card{
-    background:rgba(255,255,255,0.95);
-    border-radius:20px;
-    padding:20px;
-    box-shadow:0 10px 30px rgba(0,0,0,0.05);
-    backdrop-filter:blur(4px);
-  }
-
-  header{
-    display:flex;
-    gap:12px;
-    align-items:center;
-    flex-wrap:wrap;
-  }
-
-  .heart{
-    width:56px;
-    height:56px;
-    border-radius:14px;
-    background:linear-gradient(135deg,#FF9ACB,#FF5C8A);
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    color:white;
-    font-size:26px;
-  }
-
-  h1{
-    font-family:'Great Vibes',cursive;
-    font-size:34px;
-    margin:0;
-    color:#b43f6b;
-  }
-
-  p.lead{
-    margin:6px 0 12px;
-    color:var(--muted);
-  }
-
-  /* timeline entries */
-  .timeline{
-    margin-top:10px;
-  }
-
-  .entry{
-    display:flex;
-    gap:12px;
-    align-items:flex-start;
-    padding:12px;
-    border-radius:12px;
-    margin-bottom:10px;
-    background:white;
-    transition:0.15s ease;
-  }
-
-  .entry:hover{
-    transform:translateY(-3px);
-  }
-
-  .dot{
-    min-width:45px;
-    min-height:45px;
-    border-radius:10px;
-    background:var(--glass);
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    font-size:18px;
-    color:var(--accent);
-  }
-
-  .meta{
-    flex:1;
-  }
-
-  .meta .title{
-    font-weight:600;
-    color:#3b2a39;
-    margin:0;
-  }
-
-  .meta .date{
-    color:var(--muted);
-    font-size:13px;
-    margin-top:4px;
-  }
-
-  /* right side */
-  .side{
-    display:flex;
-    flex-direction:column;
-    gap:14px;
-  }
-
-  .preview{
-    background:white;
-    border-radius:16px;
-    padding:18px;
-    min-height:140px;
-    display:flex;
-    flex-direction:column;
-    justify-content:center;
-    align-items:center;
-    box-shadow:0 8px 18px rgba(0,0,0,0.05);
-    text-align:center;
-  }
-
-  .big-heart{
-    font-size:54px;
-  }
-
-  .small{
-    font-size:13px;
-    color:var(--muted);
-    margin-top:8px;
-  }
-
-  button{
-    background:white;
-    border:1px solid rgba(0,0,0,0.08);
-    padding:9px 12px;
-    border-radius:10px;
-    font-weight:600;
-    cursor:pointer;
-    transition:0.2s ease;
-  }
-
-  button.primary{
-    background:linear-gradient(90deg,#FF7CB0,#FF5C8A);
-    border:0;
-    color:white;
-  }
-
-  .small-input{
-    width:100%;
-    padding:8px;
-    border-radius:8px;
-    border:1px solid #eee;
-  }
-
-  .share-row{
-    display:flex;
-    gap:8px;
-  }
-
-  .modal{
-    display:none;
-    position:fixed;
-    inset:0;
-    background:rgba(0,0,0,0.45);
-    backdrop-filter:blur(3px);
-    justify-content:center;
-    align-items:center;
-    z-index:9999;
-  }
-
-  .modal-box{
-    width:320px;
-    background:white;
-    padding:20px;
-    border-radius:16px;
-    text-align:center;
-    box-shadow:0 8px 24px rgba(0,0,0,0.12);
-  }
-
-  /* MOBILE FIXES */
-  @media(max-width:820px){
-    body{
-      padding:10px;
-    }
-    .wrap{
-      grid-template-columns:1fr;
-    }
-    .side{
-      order:-1;
-    }
-    .entry{
-      padding:10px;
-    }
-    .card{
-      padding:18px;
-    }
-    .preview{
-      padding:16px;
-    }
-  }
-
-  @media(max-width:480px){
-    h1{
-      font-size:30px;
-    }
-    .heart{
-      width:48px;
-      height:48px;
-      font-size:22px;
-    }
-    .dot{
-      min-width:40px;
-      min-height:40px;
-    }
-    button{
-      font-size:14px;
-      padding:8px 10px;
-    }
-  }
-</style>
-
+  <!-- Firebase SDK -->
+  <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-firestore-compat.js"></script>
 </head>
+
 <body>
+
   <div class="wrap">
     <div class="card">
       <header>
         <div class="heart">❤</div>
         <div>
-          <h1 id="title">Our Little Story</h1>
-          <p class="lead">A sweet timeline of the moments that made us — editable, printable, and perfect for sharing.</p>
+          <h1>Our Little Story</h1>
+          <p class="lead">A sweet timeline of our moments.</p>
         </div>
       </header>
 
-      <p class="lead" style="font-style:italic; color:#b43f6b; text-align:center;">"I don't care how long it takes me. I'm going somewhere beautiful!"</p>
+      <p class="lead quote">"I don't care how long it takes me. I'm going somewhere beautiful!"</p>
 
       <div class="timeline" id="timeline"></div>
 
-      <footer>
-        <div class="hint">Tip: click any date or title to edit. Use the buttons on the right to add, share, or export.</div>
-      </footer>
+      <footer><div class="hint">Tap any entry to edit. Right-side tools help you add, share & export.</div></footer>
     </div>
 
     <div class="side">
       <div class="preview" id="preview">
         <div class="big-heart">💖</div>
-        <div class="small" id="previewText">Start — ❤️ 19.06.2024  •  1st kiss — 25.08.2025</div>
+        <div class="small" id="previewText">Start — ❤️ 19.06.2024</div>
       </div>
 
-      <div class="card" style="padding:12px">
-        <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:8px">
+      <div class="card side-card">
+        <div class="btn-row">
           <button id="addEntryBtn">Add Entry</button>
           <button class="primary" id="downloadBtn">Download PNG</button>
           <button id="printBtn">Print</button>
           <button id="resetBtn">Reset</button>
         </div>
 
-        <div style="margin-top:10px">
-          <div style="font-weight:600;color:#b43f6b;margin-bottom:6px">Account & Sharing</div>
-          <div style="display:flex;gap:8px;margin-bottom:8px">
+        <div class="sharing">
+          <div class="section-title">Account & Sharing</div>
+
+          <div class="auth-row">
             <button id="signInBtn" class="primary" style="flex:1">Sign in with Google</button>
             <button id="signOutBtn" style="display:none">Logout</button>
           </div>
 
-          <div style="font-size:13px;margin-bottom:6px">Share your timeline with a partner by entering their email below. They can then load your timeline.</div>
+          <p class="small">Share your timeline with your partner:</p>
+
           <div class="share-row">
             <input id="shareEmail" class="small-input" placeholder="partner@example.com">
             <button id="shareBtn">Share</button>
           </div>
-          <div style="margin-top:8px;font-size:13px">Or load a timeline shared with you:</div>
-          <div class="share-row" style="margin-top:6px">
+
+          <p class="small" style="margin-top:10px">Load a timeline shared with you:</p>
+
+          <div class="share-row">
             <input id="loadEmail" class="small-input" placeholder="owner@example.com">
             <button id="loadSharedBtn">Load</button>
           </div>
         </div>
-
-        <div class="hint" style="margin-top:12px">Data saved locally and synced to Firestore when signed in.</div>
       </div>
     </div>
   </div>
@@ -312,345 +80,18 @@
   <!-- Modal -->
   <div class="modal" id="entryModal">
     <div class="modal-box">
-      <h3 style="color:#FF5C8A;margin:6px 0">Add New Memory</h3>
+      <h3>Add New Memory</h3>
       <input id="modalEmoji" placeholder="Emoji (e.g. ❤️)">
       <input id="modalTitle" placeholder="Title (e.g. First kiss)">
       <input id="modalDate" type="date">
-      <div style="height:8px"></div>
       <button class="modal-btn" id="saveModalBtn">Add Entry</button>
-      <div style="height:8px"></div>
-      <button style="background:#fff;border:1px solid #f0d0df;padding:8px;border-radius:8px;" id="closeModalBtn">Cancel</button>
+      <button id="closeModalBtn" class="close-btn">Cancel</button>
     </div>
   </div>
 
-  <!-- Firebase SDKs (compat) -->
-  <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-app-compat.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-auth-compat.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-firestore-compat.js"></script>
+  <!-- App Scripts -->
+  <script src="firebase.js"></script>
+  <script src="app.js"></script>
 
-  <script>
-    // === FIREBASE CONFIG (you provided) ===
-    const firebaseConfig = {
-      apiKey: "AIzaSyDT9zKU_VPhdI7ePluufEIBQgcZlx78j1s",
-      authDomain: "relationship-timeline-d0ffa.firebaseapp.com",
-      projectId: "relationship-timeline-d0ffa",
-      storageBucket: "relationship-timeline-d0ffa.firebasestorage.app",
-      messagingSenderId: "285290324596",
-      appId: "1:285290324596:web:d08d009d9bded43c84e721",
-      measurementId: "G-9FXQQ5H244"
-    };
-
-    // initialize
-    firebase.initializeApp(firebaseConfig);
-    const auth = firebase.auth();
-    const db = firebase.firestore();
-
-    // === app state ===
-    let entries = [
-      {emoji:'❤️', title:'Start', date:'19.06.2024'},
-      {emoji:'🕓', title:'Talked for 5 hours', date:'02.10.2024'},
-      {emoji:'😌', title:'1st meet — cycled to school together', date:'21.10.2024'},
-      {emoji:'🫴', title:"Held each other's hand for the 1st time", date:'09.06.2025'},
-      {emoji:'💋', title:'1st kiss (lips & cheeks)', date:'25.08.2025'},
-      {emoji:'😙', title:'2nd kiss', date:'03.11.2025'},
-      {emoji:'🫂', title:'1st hug', date:'__________'}
-    ];
-
-    const LS_KEY = 'romantic.timeline.entries.v1';
-    const timelineEl = document.getElementById('timeline');
-    const previewText = document.getElementById('previewText');
-
-    // helper: save/load local
-    function saveToLocal(){ try{ localStorage.setItem(LS_KEY, JSON.stringify(entries)); }catch(e){console.warn(e)} }
-    function loadFromLocal(){ try{ const raw = localStorage.getItem(LS_KEY); if(raw){ const p = JSON.parse(raw); if(Array.isArray(p)) entries = p; } }catch(e){console.warn(e)} }
-
-    // render
-    function render(){ timelineEl.innerHTML=''; entries.forEach((e,i)=>{ const row = document.createElement('div'); row.className='entry'; row.draggable=true; row.dataset.index=i; row.innerHTML = ` <div class="dot">${e.emoji}</div><div class="meta"><div contenteditable="true" class="title editable" data-field="title" data-i="${i}">${escapeHtml(e.title)}</div><div contenteditable="true" class="date editable" data-field="date" data-i="${i}">${escapeHtml(e.date)}</div></div>`; 
-        // drag handlers
-        row.addEventListener('dragstart', ev => { ev.dataTransfer.setData('text/plain', i); row.style.opacity='0.5' });
-        row.addEventListener('dragend', ()=>{ row.style.opacity='1' });
-        row.addEventListener('dragover', ev=>ev.preventDefault());
-        row.addEventListener('drop', ev=>{ ev.preventDefault(); const from = parseInt(ev.dataTransfer.getData('text/plain')); const to = parseInt(row.dataset.index); if(from!==to){ const moved = entries.splice(from,1)[0]; entries.splice(to,0,moved); render(); persist(); } });
-        timelineEl.appendChild(row);
-      }); attachEditListeners(); updatePreview(); }
-
-    function attachEditListeners(){ document.querySelectorAll('.editable').forEach(el=>{ el.removeEventListener('input', onEditableInput); el.addEventListener('input', onEditableInput); }); }
-    function onEditableInput(ev){ const el = ev.target; const i = parseInt(el.dataset.i); const field = el.dataset.field; entries[i][field] = el.innerText.trim(); persist(); }
-    function updatePreview(){ const short = entries.slice(0,3).map(e=>`${e.title} — ${e.date}`).join('  •  '); previewText.textContent = short; }
-    function escapeHtml(str){ return String(str||'').replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('>','&gt;'); }
-
-    // modal
-    const entryModal = document.getElementById('entryModal');
-    document.getElementById('addEntryBtn').addEventListener('click', ()=>{ openModal(); });
-    document.getElementById('closeModalBtn').addEventListener('click', ()=>{ closeModal(); });
-    document.getElementById('saveModalBtn').addEventListener('click', ()=>{ const emoji = document.getElementById('modalEmoji').value.trim(); const title = document.getElementById('modalTitle').value.trim(); const date = document.getElementById('modalDate').value.trim(); if(!emoji||!title||!date){ alert('Please fill all fields'); return; } entries.push({emoji,title,date}); render(); persist(); closeModal(); document.getElementById('modalEmoji').value=''; document.getElementById('modalTitle').value=''; document.getElementById('modalDate').value=''; });
-    function openModal(){ entryModal.style.display = 'flex'; }
-    function closeModal(){ entryModal.style.display = 'none'; }
-
-    // persist wrapper (local + firestore if signed in)
-    let saveTimer = null; function persist(){ saveToLocal(); if(auth.currentUser){ clearTimeout(saveTimer); saveTimer = setTimeout(()=>{ saveToFirestore(); }, 600); } }
-
-    // Firestore: save as single doc per owner containing entries array
-    async function saveToFirestore(){ try{ if(!auth.currentUser) return; const uid = auth.currentUser.uid; await db.collection('timelines').doc(uid).set({ entries, updatedAt: firebase.firestore.FieldValue.serverTimestamp() }); }catch(e){ console.error('saveToFirestore',e); } }
-
-    let unsubscribe = null;
-    function startListening(uid){ if(unsubscribe){ unsubscribe(); unsubscribe = null; } unsubscribe = db.collection('timelines').doc(uid).onSnapshot(doc=>{ if(!doc.exists) return; const data = doc.data(); if(data && Array.isArray(data.entries)){ entries = data.entries; saveToLocal(); render(); } }); }
-    function stopListening(){ if(unsubscribe){ unsubscribe(); unsubscribe=null; } }
-
-    // sign-in / sign-out UI
-    const signInBtn = document.getElementById('signInBtn');
-    const signOutBtn = document.getElementById('signOutBtn');
-
-    signInBtn.addEventListener('click', async ()=>{
-      try{
-        const provider = new firebase.auth.GoogleAuthProvider();
-        const result = await auth.signInWithPopup(provider);
-        const user = result.user; // signed in
-        signInBtn.style.display = 'none'; signOutBtn.style.display = 'inline-block';
-        startListening(user.uid);
-        // if remote empty, push local
-        const doc = await db.collection('timelines').doc(user.uid).get();
-        if(!doc.exists){ await saveToFirestore(); }
-        alert('Signed in as ' + user.email);
-      }catch(e){ console.error('signin',e); alert('Sign-in failed: '+e.message); }
-    });
-
-    signOutBtn.addEventListener('click', async ()=>{ await auth.signOut(); signOutBtn.style.display='none'; signInBtn.style.display='inline-block'; stopListening(); alert('Signed out'); });
-
-    // share: write mapping from partner email -> ownerUid
-    document.getElementById('shareBtn').addEventListener('click', async ()=>{
-      const email = document.getElementById('shareEmail').value.trim().toLowerCase();
-      if(!email){ alert('Enter partner email'); return; }
-      if(!auth.currentUser){ alert('Sign in first to share'); return; }
-      try{
-        await db.collection('shares').doc(email).set({ ownerUid: auth.currentUser.uid, ownerEmail: auth.currentUser.email, updatedAt: firebase.firestore.FieldValue.serverTimestamp() });
-        alert('Shared with ' + email + '. Tell them to click Load and enter your email.');
-      }catch(e){ console.error(e); alert('Share failed: '+e.message); }
-    });
-
-    // load shared: look up shares collection for owner email -> ownerUid then listen
-    document.getElementById('loadSharedBtn').addEventListener('click', async ()=>{
-      const ownerEmail = document.getElementById('loadEmail').value.trim().toLowerCase();
-      if(!ownerEmail){ alert('Enter owner email to load'); return; }
-      try{
-        const doc = await db.collection('shares').doc(ownerEmail).get();
-        if(!doc.exists){ alert('No timeline shared for that email'); return; }
-        const data = doc.data(); if(data && data.ownerUid){ stopListening(); startListening(data.ownerUid); alert('Loaded timeline shared by ' + ownerEmail); }
-      }catch(e){ console.error(e); alert('Load failed: '+e.message); }
-    });
-
-    // reset
-    document.getElementById('resetBtn').addEventListener('click', ()=>{ if(confirm('Reset to defaults and clear local storage?')){ localStorage.removeItem(LS_KEY); entries = [ {emoji:'❤️', title:'Start', date:'19.06.2024'}, {emoji:'🕓', title:'Talked for 5 hours', date:'02.10.2024'}, {emoji:'😌', title:'1st meet — cycled to school together', date:'21.10.2024'}, {emoji:'🫴', title:"Held each other's hand for the 1st time", date:'09.06.2025'}, {emoji:'💋', title:'1st kiss (lips & cheeks)', date:'25.08.2025'}, {emoji:'😙', title:'2nd kiss', date:'03.11.2025'}, {emoji:'🫂', title:'1st hug', date:'__________'} ]; saveToLocal(); render(); } });
-
-    // print & download
-    document.getElementById('printBtn').addEventListener('click', ()=>window.print());
-    (function(){ const dlBtn = document.getElementById('downloadBtn'); dlBtn.addEventListener('click', async ()=>{ if(!window.html2canvas){ const s = document.createElement('script'); s.src='https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js'; document.body.appendChild(s); s.onload = take; } else take(); function take(){ html2canvas(document.querySelector('.wrap'), {scale:2, backgroundColor:null}).then(canvas=>{ const a = document.createElement('a'); a.href = canvas.toDataURL('image/png'); a.download = 'romantic-timeline.png'; a.click(); }).catch(err=>alert('Could not generate image: '+err)); } }); })();
-
-    // load local and render on start
-    loadFromLocal(); render();
-
-    // auth state observer (update UI if already signed in)
-    auth.onAuthStateChanged(user=>{
-      if(user){ signInBtn.style.display='none'; signOutBtn.style.display='inline-block'; startListening(user.uid); }
-      else{ signInBtn.style.display='inline-block'; signOutBtn.style.display='none'; stopListening(); }
-    });
-
-    // expose for debugging
-    window._romanticTimeline = { entries, render, persist };
-  </script>
-</body>
-</html>
-
-    .timeline{margin-top:4px}
-    .entry{display:flex;gap:16px;align-items:flex-start;padding:14px;border-radius:14px;margin-bottom:12px;transition:transform .18s ease;}
-    .entry:hover{transform:translateY(-4px)}
-    .dot{min-width:56px;min-height:56px;border-radius:12px;background:var(--glass);display:flex;align-items:center;justify-content:center;font-size:20px;color:var(--accent);box-shadow:inset 0 -6px 10px rgba(255,92,138,0.06)}
-    .meta{flex:1}
-    .meta .title{font-weight:600;color:#3b2a39;margin:0}
-    .meta .date{color:var(--muted);font-size:13px;margin-top:6px}
-
-    .side{display:flex;flex-direction:column;gap:12px}
-    .preview{background:linear-gradient(180deg,#fff,#fff);border-radius:20px;padding:18px;min-height:180px;display:flex;align-items:center;justify-content:center;flex-direction:column;box-shadow:0 8px 22px rgba(0,0,0,0.06)}
-    .preview .big-heart{font-size:72px}
-    .small{color:var(--muted);font-size:13px;text-align:center;margin-top:8px}
-
-    .controls{display:flex;gap:8px;margin-top:8px}
-    button{background:#fff;border:1px solid rgba(0,0,0,0.06);padding:10px 12px;border-radius:10px;font-weight:600;cursor:pointer}
-    button.primary{background:linear-gradient(90deg,#FF7CB0,#FF5C8A);color:white;border:0;box-shadow:0 8px 20px rgba(255,92,138,0.18)}
-
-    .editable{cursor:text;padding:6px;border-radius:8px}
-    .hint{font-size:12px;color:var(--muted);margin-top:6px}
-
-    footer{margin-top:16px;padding-top:12px;border-top:1px dashed rgba(0,0,0,0.04);display:flex;gap:10px;align-items:center;justify-content:flex-end}
-
-    @media(max-width:820px){.wrap{grid-template-columns:1fr;}}
-  </style>
-</head>
-<body>
-  <div class="wrap">
-    <div class="card">
-      <header>
-        <div class="heart">❤</div>
-        <div>
-          <h1 id="title">Our Little Story</h1>
-          <p class="lead">A sweet timeline of the moments that made us — editable, printable, and perfect for sharing.</p>
-        </div>
-      </header>
-
-      <p class="lead" style="font-style:italic; color:#b43f6b; text-align:center; margin-top:4px;">"I don't care how long it takes me. I'm going somewhere beautiful!"</p>
-
-      <div class="timeline" id="timeline">
-        <!-- Entries injected by JS -->
-      </div>
-
-      <footer>
-        <div class="hint">Tip: click any date or title to edit. Then use <strong>Download</strong> or <strong>Print</strong>.</div>
-      </footer>
-    </div>
-
-    <div class="side">
-      <div class="preview" id="preview">
-        <div class="big-heart">💖</div>
-        <div class="small" id="previewText">Start — ❤️ 19.06.2024  •  1st kiss — 25.08.2025</div>
-      </div>
-
-      <div class="card" style="padding:12px">
-        <div style="display:flex;gap:8px;flex-wrap:wrap">
-          <button id="addEntryBtn">Add Entry</button>
-          <button id="addEmojiBtn">Add Emoji Entry</button>
-          <button id="addDateBtn">Add Date Entry</button>
-          <button class="primary" id="downloadBtn">Download as PNG</button>
-          <button id="printBtn">Print</button>
-          <button id="resetBtn">Reset to original</button>
-        </div>
-        <div class="hint">You can rearrange entries by dragging (mobile not supported). Click an entry's title or date to edit.</div>
-      </div>
-    </div>
-  </div>
-
-  <script>
-    const entries = [
-      {emoji:'❤️', title:'Start', date:'19.06.2024'},
-      {emoji:'🕓', title:'Talked for 5 hours', date:'02.10.2024'},
-      {emoji:'😌', title:'1st meet — cycled to school together', date:'21.10.2024'},
-      {emoji:'🫴', title:"Held each other's hand for the 1st time", date:'09.06.2025'},
-      {emoji:'💋', title:'1st kiss (lips & cheeks)', date:'25.08.2025'},
-      {emoji:'😙', title:'2nd kiss', date:'03.11.2025'},
-      {emoji:'🫂', title:'1st hug', date:'__________'}
-    ];
-
-    const timelineEl = document.getElementById('timeline');
-    const previewText = document.getElementById('previewText');
-
-    function render(){
-      timelineEl.innerHTML='';
-      entries.forEach((e,i)=>{
-        const row = document.createElement('div');
-        row.className='entry';
-        row.draggable = true;
-        row.dataset.index = i;
-
-        row.innerHTML = `
-          <div class="dot">${e.emoji}</div>
-          <div class="meta">
-            <div contenteditable="true" class="title editable" data-field="title" data-i="${i}">${escapeHtml(e.title)}</div>
-            <div contenteditable="true" class="date editable" data-field="date" data-i="${i}">${escapeHtml(e.date)}</div>
-          </div>
-        `;
-
-        // Add drag handlers
-        row.addEventListener('dragstart', (ev)=>{ev.dataTransfer.setData('text/plain', i); row.style.opacity='0.4'});
-        row.addEventListener('dragend', ()=>{row.style.opacity='1'});
-        row.addEventListener('dragover', (ev)=>ev.preventDefault());
-        row.addEventListener('drop', (ev)=>{
-          ev.preventDefault();
-          const from = parseInt(ev.dataTransfer.getData('text/plain'));
-          const to = parseInt(row.dataset.index);
-          if(from!==to){
-            const moved = entries.splice(from,1)[0];
-            entries.splice(to,0,moved);
-            render();
-          }
-        });
-
-        timelineEl.appendChild(row);
-      });
-
-      updatePreview();
-      attachEditListeners();
-    }
-
-    function attachEditListeners(){
-      document.querySelectorAll('.editable').forEach(el=>{
-        el.addEventListener('input', (ev)=>{
-          const i = el.dataset.i;
-          const field = el.dataset.field;
-          entries[i][field] = el.innerText.trim();
-          updatePreview();
-        });
-      });
-    }
-
-    function updatePreview(){
-      const short = entries.filter(Boolean).slice(0,3).map(e=>`${e.title} — ${e.date}`).join('  •  ');
-      previewText.textContent = short || '';
-    }
-
-    function escapeHtml(str){
-      return str.replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('>','&gt;');
-    }
-
-    // Buttons
-    document.getElementById('resetBtn').addEventListener('click', ()=>{if(confirm('Reset timeline to the original entries?')){location.reload()}});
-    document.getElementById('printBtn').addEventListener('click', ()=>{window.print()});
-
-    // Download using html2canvas CDN
-    (function(){
-      const dlBtn = document.getElementById('downloadBtn');
-      dlBtn.addEventListener('click', async ()=>{
-        if(!window.html2canvas){
-          const s = document.createElement('script');
-          s.src = 'https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js';
-          document.body.appendChild(s);
-          s.onload = take;
-        } else take();
-
-        function take(){
-          html2canvas(document.querySelector('.wrap'), {scale:2, backgroundColor:null}).then(canvas=>{
-            const a = document.createElement('a');
-            a.href = canvas.toDataURL('image/png');
-            a.download = 'romantic-timeline.png';
-            a.click();
-          }).catch(err=>alert('Could not generate image: '+err));
-        }
-      });
-    })();
-
-    // Add new entry
-    document.getElementById('addEmojiBtn').addEventListener('click', ()=>{
-      const emoji = prompt('Enter emoji:');
-      const title = prompt('Enter title:');
-      const date = prompt('Enter date:');
-      if(emoji && title && date){ entries.push({emoji,title,date}); render(); }
-    });
-
-    document.getElementById('addDateBtn').addEventListener('click', ()=>{
-      const emoji = prompt('Enter emoji:');
-      const title = prompt('Enter title:');
-      const date = prompt('Enter date:');
-      if(emoji && title && date){ entries.push({emoji,title,date}); render(); }
-    });
-
-    // Add new entry
-    document.getElementById('addEntryBtn').addEventListener('click', ()=>{
-      const emoji = prompt('Enter emoji:');
-      const title = prompt('Enter title:');
-      const date = prompt('Enter date:');
-      if(emoji && title && date){ entries.push({emoji,title,date}); render(); }
-    });
-
-    // initial render
-    render();
-  </script>
 </body>
 </html>
