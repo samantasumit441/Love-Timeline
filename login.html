@@ -5,43 +5,44 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Login — Romantic Timeline</title>
 
-  <link rel="stylesheet" href="style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
 
-  <!-- Firebase -->
+  <!-- Firebase SDK (compat) -->
   <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-auth-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-firestore-compat.js"></script>
 </head>
-
 <body class="login-body">
 
-  <div class="login-container">
-    <h1 class="login-title">Welcome 💖</h1>
+  <div class="login-container" role="main" aria-labelledby="welcomeTitle">
+    <h1 id="welcomeTitle" class="login-title">Welcome 💖</h1>
     <p class="login-subtitle">Sign in to view your love story</p>
 
     <button id="googleLoginBtn" class="google-btn">Sign in with Google</button>
+
+    <p style="margin-top:12px;color:#7a7a7a;font-size:13px">Make sure your Firebase Authorized Domains include <strong>love-timeline-lime.vercel.app</strong>.</p>
   </div>
 
   <script src="firebase.js"></script>
-
   <script>
-    const btn = document.getElementById("googleLoginBtn");
-
-    btn.onclick = async () => {
-      const provider = new firebase.auth.GoogleAuthProvider();
-
-      try {
-        const result = await firebase.auth().signInWithPopup(provider);
-        window.location.href = "index.html";
-      } catch (e) {
-        alert("Login failed: " + e.message);
-      }
-    };
-
+    // If already signed in, go to index
     firebase.auth().onAuthStateChanged(user => {
-      if (user) window.location.href = "index.html";
+      if (user) {
+        window.location.href = 'index.html';
+      }
+    });
+
+    document.getElementById('googleLoginBtn').addEventListener('click', async () => {
+      try {
+        const provider = new firebase.auth.GoogleAuthProvider();
+        await firebase.auth().signInWithPopup(provider);
+        // auth state change will redirect
+      } catch (err) {
+        console.error('Login error', err);
+        alert('Sign-in failed: ' + (err.message || err.code));
+      }
     });
   </script>
-
 </body>
 </html>
