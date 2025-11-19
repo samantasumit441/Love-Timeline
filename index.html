@@ -2,39 +2,37 @@
 <html lang="en">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Romantic Timeline — Our Little Story</title>
 
-  <title>Romantic Timeline — Cute Card</title>
-
-  <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
-
-  <!-- Styles -->
   <link rel="stylesheet" href="style.css">
 
-  <!-- Firebase SDK -->
+  <!-- Firebase SDK (compat) -->
   <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-auth-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-firestore-compat.js"></script>
 </head>
-
 <body>
-
-  <div class="wrap">
+  <div class="wrap" id="appWrap">
     <div class="card">
       <header>
         <div class="heart">❤</div>
         <div>
-          <h1>Our Little Story</h1>
-          <p class="lead">A sweet timeline of our moments.</p>
+          <h1 id="title">Our Little Story</h1>
+          <p class="lead">A sweet timeline of the moments that made us — editable and shareable.</p>
         </div>
       </header>
 
       <p class="lead quote">"I don't care how long it takes me. I'm going somewhere beautiful!"</p>
 
+      <div id="topStatus"></div>
+
       <div class="timeline" id="timeline"></div>
 
-      <footer><div class="hint">Tap any entry to edit. Right-side tools help you add, share & export.</div></footer>
+      <footer>
+        <div class="hint">Tip: click any title or date to edit. Use right-side tools to add, share, or export.</div>
+      </footer>
     </div>
 
     <div class="side">
@@ -44,54 +42,54 @@
       </div>
 
       <div class="card side-card">
-        <div class="btn-row">
+        <div class="btn-row" style="margin-bottom:12px">
           <button id="addEntryBtn">Add Entry</button>
           <button class="primary" id="downloadBtn">Download PNG</button>
           <button id="printBtn">Print</button>
           <button id="resetBtn">Reset</button>
         </div>
 
-        <div class="sharing">
-          <div class="section-title">Account & Sharing</div>
+        <div style="margin-top:6px">
+          <div style="font-weight:600;color:#b43f6b;margin-bottom:6px">Account & Sharing</div>
+          <div id="authStatus" style="margin-bottom:8px"></div>
 
-          <div class="auth-row">
-            <button id="signInBtn" class="primary" style="flex:1">Sign in with Google</button>
-            <button id="signOutBtn" style="display:none">Logout</button>
+          <div class="auth-row" style="margin-bottom:8px">
+            <button id="signOutBtn">Logout</button>
           </div>
 
-          <p class="small">Share your timeline with your partner:</p>
-
+          <div style="font-size:13px;margin-bottom:6px">Share your timeline with a partner by entering their email below.</div>
           <div class="share-row">
             <input id="shareEmail" class="small-input" placeholder="partner@example.com">
             <button id="shareBtn">Share</button>
           </div>
 
-          <p class="small" style="margin-top:10px">Load a timeline shared with you:</p>
-
-          <div class="share-row">
+          <div style="margin-top:8px;font-size:13px">Or load a timeline shared with you:</div>
+          <div class="share-row" style="margin-top:6px">
             <input id="loadEmail" class="small-input" placeholder="owner@example.com">
             <button id="loadSharedBtn">Load</button>
           </div>
         </div>
+
+        <div class="hint" style="margin-top:12px">Data saved locally and synced to Firestore when signed in.</div>
       </div>
     </div>
   </div>
 
-  <!-- Modal -->
-  <div class="modal" id="entryModal">
+  <!-- modal -->
+  <div class="modal" id="entryModal" aria-hidden="true">
     <div class="modal-box">
-      <h3>Add New Memory</h3>
+      <h3 style="color:#FF5C8A;margin:6px 0">Add New Memory</h3>
       <input id="modalEmoji" placeholder="Emoji (e.g. ❤️)">
       <input id="modalTitle" placeholder="Title (e.g. First kiss)">
       <input id="modalDate" type="date">
+      <div style="height:10px"></div>
       <button class="modal-btn" id="saveModalBtn">Add Entry</button>
+      <div style="height:8px"></div>
       <button id="closeModalBtn" class="close-btn">Cancel</button>
     </div>
   </div>
 
-  <!-- App Scripts -->
   <script src="firebase.js"></script>
   <script src="app.js"></script>
-
 </body>
 </html>
