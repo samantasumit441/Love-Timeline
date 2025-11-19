@@ -22,6 +22,8 @@ body{
   display:flex;
   justify-content:center;
   overflow-x:hidden;
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
 }
 
 .wrap{
@@ -199,15 +201,7 @@ button.primary{
   background:#f6f6f6;
 }
 
-@media(max-width:820px){
-  .wrap{
-    grid-template-columns:1fr;
-  }
-  .side{
-    order:-1;
-  }
-}
-/* LOGIN PAGE */
+/* LOGIN styles */
 .login-body{
   background:
     radial-gradient(900px 500px at 10% 10%, #FFE6F1 0%, transparent 60%),
@@ -253,4 +247,13 @@ button.primary{
   font-weight:600;
   cursor:pointer;
   font-size:16px;
+}
+
+@media(max-width:820px){
+  .wrap{
+    grid-template-columns:1fr;
+  }
+  .side{
+    order:-1;
+  }
 }
